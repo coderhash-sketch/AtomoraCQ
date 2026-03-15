@@ -7,7 +7,15 @@ export enum WorkflowState {
   IMPACT = 'impact',
   ANALYTICS = 'analytics',
   CONFIG = 'config',
-  LOGS = 'logs'
+  LOGS = 'logs',
+  SUSTAINABILITY = 'sustainability',
+  CITY_ADVISOR = 'city-advisor',
+  URBAN_INDEX = 'urban-index',
+  AIR_STORY = 'air-story',
+  EXPLAINABLE_AI = 'explainable-ai',
+  POLLUTION_JOURNEY = 'pollution-journey',
+  CLIMATE_NETWORK = 'climate-network',
+  SCENARIO_LAB = 'scenario-lab'
 }
 
 export interface MaterialCandidate {

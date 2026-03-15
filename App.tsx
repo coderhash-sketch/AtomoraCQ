@@ -29,6 +29,14 @@ import LabConfig from './components/LabConfig';
 import EconomicLens from './components/EconomicLens';
 import LogHistory from './components/LogHistory';
 import SDGModal from './components/SDGModal';
+import MyClimateImpact from './components/MyClimateImpact';
+import GreenCityAdvisor from './components/GreenCityAdvisor';
+import UrbanSustainabilityIndex from './components/UrbanSustainabilityIndex';
+import AirStoryMode from './components/AirStoryMode';
+import ExplainableAIPanel from './components/ExplainableAIPanel';
+import PollutionJourneySimulator from './components/PollutionJourneySimulator';
+import ClimateActionNetwork from './components/ClimateActionNetwork';
+import CleanAirScenarioLab from './components/CleanAirScenarioLab';
 
 const DISCOVERY_DATABASE: MaterialCandidate[] = [
   {
@@ -118,7 +126,6 @@ const DISCOVERY_DATABASE: MaterialCandidate[] = [
   }
 ];
 
-// Helper to create MOF-like structures for background
 const BackgroundMolecule = ({ color, size }: { color: string, size: number }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className="opacity-40">
     <circle cx="50" cy="50" r="8" fill={color} />
@@ -170,7 +177,7 @@ const FloatingBackground = () => {
         speed: i % 3 === 0 ? 'animate-float-slow' : i % 3 === 1 ? 'animate-float-medium' : 'animate-float-fast',
         type,
         size: Math.random() * 25 + 10,
-        color: i % 5 === 0 ? '#22d3ee' : i % 5 === 1 ? '#d946ef' : i % 5 === 2 ? '#84cc16' : i % 5 === 3 ? '#3b82f6' : '#f43f5e'
+        color: i % 5 === 0 ? '#22d3ee' : i % 5 === 1 ? '#a855f7' : i % 5 === 2 ? '#84cc16' : i % 5 === 3 ? '#3b82f6' : '#f43f5e'
       };
     });
   }, []);
@@ -193,21 +200,6 @@ const FloatingBackground = () => {
           {p.type === 2 && <div className="font-mono font-black select-none" style={{ color: p.color, fontSize: p.size / 2.2 }}>|{Math.random() > 0.5 ? '01' : '10'}⟩</div>}
           {p.type === 3 && <Atom size={p.size} style={{ color: p.color }} className="animate-spin-slow" />}
         </div>
-      ))}
-      
-      {[...Array(40)].map((_, i) => (
-        <div 
-          key={`fly-${i}`}
-          className="absolute bg-white rounded-full blur-[1px] animate-float-fast"
-          style={{
-            width: '1.2px',
-            height: '1.2px',
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${i * -1.5}s`,
-            opacity: 0.2
-          }}
-        />
       ))}
     </div>
   );
@@ -276,6 +268,14 @@ const App: React.FC = () => {
       case WorkflowState.ANALYTICS: return { text: "MARKET FEASIBILITY MAPPING", color: "text-blue-400" };
       case WorkflowState.CONFIG: return { text: "INFRASTRUCTURE OPTIMIZATION", color: "text-cyan-400" };
       case WorkflowState.LOGS: return { text: "HISTORICAL EXPERIMENT ARCHIVE", color: "text-magenta-400" };
+      case WorkflowState.SUSTAINABILITY: return { text: "PERSONAL FOOTPRINT ANALYTICS", color: "text-blue-400" };
+      case WorkflowState.CITY_ADVISOR: return { text: "URBAN INTERVENTION PLANNER", color: "text-magenta-500" };
+      case WorkflowState.URBAN_INDEX: return { text: "GLOBAL SUSTAINABILITY RANKING", color: "text-cyan-400" };
+      case WorkflowState.AIR_STORY: return { text: "ATMOSPHERIC NARRATIVE MODE", color: "text-purple-400" };
+      case WorkflowState.EXPLAINABLE_AI: return { text: "NEURAL PREDICTION EXPLAINER", color: "text-cyan-400" };
+      case WorkflowState.POLLUTION_JOURNEY: return { text: "PARTICLE TRAJECTORY SIMULATOR", color: "text-emerald-400" };
+      case WorkflowState.CLIMATE_NETWORK: return { text: "COMMUNITY IMPACT NETWORK", color: "text-lime-400" };
+      case WorkflowState.SCENARIO_LAB: return { text: "CLEAN AIR SCENARIO LAB", color: "text-cyan-400" };
       default: return { text: "SYSTEM ACTIVE", color: "text-slate-400" };
     }
   };
@@ -283,7 +283,7 @@ const App: React.FC = () => {
   const status = getStatusLabel(workflow);
 
   return (
-    <div className={`min-h-screen flex transition-colors duration-500 relative ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen flex transition-colors duration-500 relative eco-gradient ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
       <FloatingBackground />
       <Sidebar workflow={workflow} setWorkflow={setWorkflow} />
       
@@ -307,10 +307,10 @@ const App: React.FC = () => {
                 <span className="neonic-logo transition-transform group-hover:scale-105 duration-500">Atomora</span>
                 <span className="neonic-text relative ml-1">
                   CQ
-                  <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 to-magenta-500 blur-md opacity-0 group-hover:opacity-30 animate-spin-slow rounded-full -z-10"></div>
+                  <div className="absolute -inset-2 bg-gradient-to-r from-cyan-400 to-purple-500 blur-md opacity-0 group-hover:opacity-30 animate-spin-slow rounded-full -z-10"></div>
                 </span>
               </h1>
-              <p className="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] mt-2 ml-1 opacity-70 group-hover:opacity-100 transition-opacity">Quantum Synthesis Lab</p>
+              <p className="text-[11px] text-slate-500 font-black uppercase tracking-[0.4em] mt-2 ml-1 opacity-70 group-hover:opacity-100 transition-opacity">Futuristic Climate Intelligence</p>
             </div>
           </div>
 
@@ -409,6 +409,14 @@ const App: React.FC = () => {
           {workflow === WorkflowState.ANALYTICS && <EconomicLens />}
           {workflow === WorkflowState.CONFIG && <LabConfig />}
           {workflow === WorkflowState.LOGS && <LogHistory />}
+          {workflow === WorkflowState.SUSTAINABILITY && <MyClimateImpact />}
+          {workflow === WorkflowState.CITY_ADVISOR && <GreenCityAdvisor />}
+          {workflow === WorkflowState.URBAN_INDEX && <UrbanSustainabilityIndex />}
+          {workflow === WorkflowState.AIR_STORY && <AirStoryMode />}
+          {workflow === WorkflowState.EXPLAINABLE_AI && <ExplainableAIPanel />}
+          {workflow === WorkflowState.POLLUTION_JOURNEY && <PollutionJourneySimulator />}
+          {workflow === WorkflowState.CLIMATE_NETWORK && <ClimateActionNetwork />}
+          {workflow === WorkflowState.SCENARIO_LAB && <CleanAirScenarioLab />}
         </div>
 
         <div className="h-14 glass border-t border-slate-200 dark:border-slate-800 flex items-center px-6 gap-6 overflow-hidden z-20">

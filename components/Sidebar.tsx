@@ -9,6 +9,14 @@ import {
   Activity, 
   Leaf,
   Layers,
+  User,
+  Map as MapIcon,
+  Globe,
+  PlayCircle,
+  BrainCircuit,
+  Wind,
+  Share2,
+  Zap
 } from 'lucide-react';
 import { WorkflowState } from '../types';
 
@@ -90,6 +98,102 @@ const Sidebar: React.FC<SidebarProps> = ({ workflow, setWorkflow }) => {
       activeBg: 'bg-amber-400/10',
       activeBorder: 'border-amber-400/20',
       glowShadow: 'shadow-[inset_0_0_20px_rgba(251,191,36,0.1)]'
+    },
+    { 
+      id: 'sustainability', 
+      label: 'Climate Impact', 
+      desc: 'Personal Footprint',
+      icon: User, 
+      state: WorkflowState.SUSTAINABILITY,
+      active: workflow === WorkflowState.SUSTAINABILITY,
+      colorClass: 'text-blue-400',
+      activeBg: 'bg-blue-400/10',
+      activeBorder: 'border-blue-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(59,130,246,0.1)]'
+    },
+    { 
+      id: 'city-advisor', 
+      label: 'City Advisor', 
+      desc: 'Urban Planning',
+      icon: MapIcon, 
+      state: WorkflowState.CITY_ADVISOR,
+      active: workflow === WorkflowState.CITY_ADVISOR,
+      colorClass: 'text-magenta-500',
+      activeBg: 'bg-magenta-500/10',
+      activeBorder: 'border-magenta-500/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(217,70,239,0.1)]'
+    },
+    { 
+      id: 'urban-index', 
+      label: 'Urban Index', 
+      desc: 'Global Ranking',
+      icon: Globe, 
+      state: WorkflowState.URBAN_INDEX,
+      active: workflow === WorkflowState.URBAN_INDEX,
+      colorClass: 'text-cyan-400',
+      activeBg: 'bg-cyan-400/10',
+      activeBorder: 'border-cyan-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]'
+    },
+    { 
+      id: 'air-story', 
+      label: 'Air Story', 
+      desc: 'Narrative Mode',
+      icon: PlayCircle, 
+      state: WorkflowState.AIR_STORY,
+      active: workflow === WorkflowState.AIR_STORY,
+      colorClass: 'text-purple-400',
+      activeBg: 'bg-purple-400/10',
+      activeBorder: 'border-purple-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(168,85,247,0.1)]'
+    },
+    { 
+      id: 'explainable-ai', 
+      label: 'XAI Panel', 
+      desc: 'Neural Logic',
+      icon: BrainCircuit, 
+      state: WorkflowState.EXPLAINABLE_AI,
+      active: workflow === WorkflowState.EXPLAINABLE_AI,
+      colorClass: 'text-cyan-400',
+      activeBg: 'bg-cyan-400/10',
+      activeBorder: 'border-cyan-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]'
+    },
+    { 
+      id: 'pollution-journey', 
+      label: 'Journey Sim', 
+      desc: 'Particle Path',
+      icon: Wind, 
+      state: WorkflowState.POLLUTION_JOURNEY,
+      active: workflow === WorkflowState.POLLUTION_JOURNEY,
+      colorClass: 'text-emerald-400',
+      activeBg: 'bg-emerald-400/10',
+      activeBorder: 'border-emerald-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(16,185,129,0.1)]'
+    },
+    { 
+      id: 'climate-network', 
+      label: 'Action Network', 
+      desc: 'Community Impact',
+      icon: Share2, 
+      state: WorkflowState.CLIMATE_NETWORK,
+      active: workflow === WorkflowState.CLIMATE_NETWORK,
+      colorClass: 'text-lime-400',
+      activeBg: 'bg-lime-400/10',
+      activeBorder: 'border-lime-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(163,230,71,0.1)]'
+    },
+    { 
+      id: 'scenario-lab', 
+      label: 'Scenario Lab', 
+      desc: 'Reduction Sim',
+      icon: Zap, 
+      state: WorkflowState.SCENARIO_LAB,
+      active: workflow === WorkflowState.SCENARIO_LAB,
+      colorClass: 'text-cyan-400',
+      activeBg: 'bg-cyan-400/10',
+      activeBorder: 'border-cyan-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]'
     },
   ];
 

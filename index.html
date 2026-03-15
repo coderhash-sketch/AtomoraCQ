@@ -75,16 +75,17 @@
         border: 1px solid rgba(0, 0, 0, 0.05);
       }
       .dark .glass {
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
       }
       .neonic-border {
         border: 1px solid;
-        border-image-source: linear-gradient(45deg, #22d3ee, #d946ef, #84cc16, #3b82f6);
+        border-image-source: linear-gradient(45deg, #22d3ee, #a855f7, #84cc16, #3b82f6);
         border-image-slice: 1;
       }
       .neonic-text {
-        background: linear-gradient(45deg, #22d3ee, #d946ef, #84cc16, #3b82f6);
+        background: linear-gradient(45deg, #22d3ee, #a855f7, #84cc16, #3b82f6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -94,12 +95,12 @@
         -webkit-text-fill-color: transparent;
       }
       .neonic-logo {
-        background: linear-gradient(45deg, #22d3ee, #84cc16);
+        background: linear-gradient(45deg, #22d3ee, #a855f7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
       .neonic-discovery {
-        background: linear-gradient(to right, #f8fafc 0%, #a3e635 50%, #065f46 100%);
+        background: linear-gradient(to right, #f8fafc 0%, #a3e635 50%, #22d3ee 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -107,29 +108,71 @@
         color: #fbbf24;
         text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
       }
+      .glow-cyan {
+        box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+      }
+      .glow-purple {
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+      }
+      .glow-lime {
+        box-shadow: 0 0 20px rgba(163, 230, 71, 0.4);
+      }
+      .eco-gradient {
+        background: 
+          radial-gradient(circle at 0% 0%, rgba(34, 211, 238, 0.15), transparent 50%),
+          radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.15), transparent 50%),
+          radial-gradient(circle at 100% 100%, rgba(132, 204, 22, 0.1), transparent 50%),
+          radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.1), transparent 50%),
+          radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1), rgba(2, 6, 23, 1));
+        background-color: #020617;
+      }
+      
+      /* Global Glow Elements */
+      .glow-text-cyan { text-shadow: 0 0 10px rgba(34, 211, 238, 0.5); }
+      .glow-text-lime { text-shadow: 0 0 10px rgba(163, 230, 71, 0.5); }
+      .glow-text-purple { text-shadow: 0 0 10px rgba(168, 85, 247, 0.5); }
+      
+      .neon-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease;
+      }
+      
+      .neon-card:hover {
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
       ::-webkit-scrollbar {
-        width: 6px;
+        width: 4px;
       }
       ::-webkit-scrollbar-track {
-        background: transparent;
+        background: rgba(0, 0, 0, 0.2);
       }
       ::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.1);
+        background: linear-gradient(to bottom, #22d3ee, #a855f7);
         border-radius: 10px;
       }
     </style>
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react/": "https://esm.sh/react@^19.2.4/",
     "react": "https://esm.sh/react@^19.2.4",
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.563.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "motion/react": "https://esm.sh/motion@^12.0.0/react",
+    "motion": "https://esm.sh/motion@^12.0.0",
+    "recharts": "https://esm.sh/recharts@^3.0.0"
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
   <body class="transition-colors duration-300">
     <div id="root"></div>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

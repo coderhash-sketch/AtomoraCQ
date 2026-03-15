@@ -34,7 +34,7 @@ const AIFilteringEngine: React.FC = () => {
     { id: 'validation', label: 'Scientific Validation', status: 'pending', progress: 0 },
   ];
 
-  const [activeSteps, setActiveSteps] = useState<ProcessStep[]>(steps);
+  const [activeSteps, setActiveSteps] = useState(steps);
 
   const mockLeaderboard: MaterialCandidate[] = useMemo(() => [
     { 
@@ -111,13 +111,6 @@ const AIFilteringEngine: React.FC = () => {
           <div className="mt-8 px-6 py-2 bg-slate-800 rounded-xl text-[10px] font-black uppercase text-slate-400">Sample Dataset: 1.2M Entries ready</div>
         </div>
       </div>
-
-      <div className="flex items-center gap-6 p-6 glass rounded-2xl border-slate-800">
-        <div className="flex items-center gap-3">
-          <Leaf className="w-5 h-5 text-lime-400" />
-          <span className="text-xs font-bold text-slate-300">SDG-13 Aligned: Accelerating decarbonization by 15x</span>
-        </div>
-      </div>
     </div>
   );
 
@@ -126,8 +119,11 @@ const AIFilteringEngine: React.FC = () => {
       <div className="w-full max-w-3xl space-y-8">
         <div className="flex justify-between items-end">
           <div>
-            <h3 className="text-3xl font-black text-white tracking-tighter mb-1">Pipeline Active</h3>
-            <p className="text-slate-500 font-mono text-[10px] uppercase tracking-[0.3em]">Phase: {activeSteps[currentStepIndex].label}</p>
+            <h3 className="text-3xl font-black text-white tracking-tighter mb-1">Discovery Pipeline Active</h3>
+            <p className="text-slate-500 font-mono text-[10px] uppercase tracking-[0.3em] flex items-center gap-2">
+              <Activity className="w-3 h-3 text-magenta-400 animate-pulse" />
+              Phase: {activeSteps[currentStepIndex].label}
+            </p>
           </div>
           <div className="text-right">
             <span className="text-4xl font-mono font-black neonic-text">{Math.floor(pipelineProgress)}%</span>
@@ -158,16 +154,16 @@ const AIFilteringEngine: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-8 w-full max-w-2xl">
-        <div className="glass p-8 rounded-3xl border-slate-800 flex flex-col items-center justify-center relative overflow-hidden">
-           <div className="absolute inset-0 bg-magenta-500/5 blur-[40px]"></div>
+        <div className="glass p-8 rounded-3xl border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
+           <div className="absolute inset-0 bg-magenta-500/5 blur-[40px] group-hover:bg-magenta-500/10 transition-colors"></div>
            <Loader2 className="w-10 h-10 text-magenta-400 animate-spin mb-4" />
            <span className="text-3xl font-mono font-black text-white mb-1">
              {Math.floor(Math.random() * 999999).toLocaleString()}
            </span>
            <span className="text-[10px] font-black uppercase text-slate-500 tracking-widest">GNN Descriptors Screened</span>
         </div>
-        <div className="glass p-8 rounded-3xl border-slate-800 flex flex-col items-center justify-center relative overflow-hidden">
-           <div className="absolute inset-0 bg-cyan-500/5 blur-[40px]"></div>
+        <div className="glass p-8 rounded-3xl border-slate-800 flex flex-col items-center justify-center relative overflow-hidden group">
+           <div className="absolute inset-0 bg-cyan-500/5 blur-[40px] group-hover:bg-cyan-500/10 transition-colors"></div>
            <Zap className="w-10 h-10 text-cyan-400 animate-pulse mb-4" />
            <span className="text-3xl font-mono font-black text-white mb-1">
              {(Math.random() * -15).toFixed(2)} eV
@@ -180,59 +176,28 @@ const AIFilteringEngine: React.FC = () => {
 
   const renderDashboard = () => (
     <div className="flex-1 flex flex-col space-y-10 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-      {/* Header Metrics - Adjusted font-size for better visibility */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="glass p-6 rounded-[2rem] border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Search className="w-10 h-10 text-white" />
-          </div>
-          <div className="relative z-10">
-            <div className="text-3xl font-black text-cyan-400 tracking-tighter mb-2 drop-shadow-[0_0_15px_rgba(34,211,238,0.4)]">
-              {analysisMetrics.analyzed.toLocaleString()}
+        {[
+          { icon: Search, value: analysisMetrics.analyzed.toLocaleString(), label: 'Materials Analyzed', color: 'text-cyan-400' },
+          { icon: CheckCircle2, value: `${analysisMetrics.accuracy}%`, label: 'Validation Match', color: 'text-lime-400' },
+          { icon: Leaf, value: '$14/t', label: 'Capture Alpha', color: 'text-emerald-400' },
+          { icon: Cpu, value: '-14.2 H', label: 'Avg VQE Energy', color: 'text-magenta-400' }
+        ].map((m, i) => (
+          <div key={i} className="glass p-6 rounded-[2rem] border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 relative overflow-hidden group hover:border-slate-700 transition-all">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <m.icon className="w-10 h-10 text-white" />
             </div>
-            <div className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] leading-tight">No. of Materials Analyzed</div>
-          </div>
-        </div>
-
-        <div className="glass p-6 rounded-[2rem] border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <CheckCircle2 className="w-10 h-10 text-white" />
-          </div>
-          <div className="relative z-10">
-            <div className="text-3xl font-black text-lime-400 tracking-tighter mb-2 drop-shadow-[0_0_15px_rgba(163,230,71,0.4)]">
-              {analysisMetrics.accuracy}%
+            <div className="relative z-10">
+              <div className={`text-3xl font-black ${m.color} tracking-tighter mb-2 drop-shadow-[0_0_15px_currentColor]`}>
+                {m.value}
+              </div>
+              <div className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] leading-tight">{m.label}</div>
             </div>
-            <div className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] leading-tight">Validated Match Score</div>
           </div>
-        </div>
-
-        <div className="glass p-6 rounded-[2rem] border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Leaf className="w-10 h-10 text-white" />
-          </div>
-          <div className="relative z-10">
-            <div className="text-3xl font-black text-emerald-400 tracking-tighter mb-2 drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]">
-              $14/t
-            </div>
-            <div className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] leading-tight">Carbon Capture Alpha</div>
-          </div>
-        </div>
-
-        <div className="glass p-6 rounded-[2rem] border-slate-800 bg-gradient-to-br from-slate-900/50 to-slate-950/50 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-            <Cpu className="w-10 h-10 text-white" />
-          </div>
-          <div className="relative z-10">
-            <div className="text-3xl font-black text-magenta-400 tracking-tighter mb-2 drop-shadow-[0_0_15px_rgba(217,70,239,0.4)]">
-              -14.2 H
-            </div>
-            <div className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] leading-tight">Avg. VQE Adsorption</div>
-          </div>
-        </div>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        {/* Hybrid Optimization Leaderboard */}
         <div className="lg:col-span-7 space-y-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -266,10 +231,6 @@ const AIFilteringEngine: React.FC = () => {
                       <span className="text-sm font-black text-white">{item.efficiencyScore}%</span>
                    </div>
                    <div className="flex flex-col items-center">
-                      <span className="text-[8px] font-black text-slate-600 uppercase mb-1">Durability</span>
-                      <span className="text-sm font-black text-white">{item.durabilityScore}%</span>
-                   </div>
-                   <div className="flex flex-col items-center">
                       <span className="text-[8px] font-black text-slate-600 uppercase mb-1">Rank Score</span>
                       <span className="text-xl font-black neonic-text">{item.compositeScore}</span>
                    </div>
@@ -282,20 +243,18 @@ const AIFilteringEngine: React.FC = () => {
           </div>
         </div>
 
-        {/* Technical Validation & Topology */}
         <div className="lg:col-span-5 space-y-10">
-          <div className="glass p-8 rounded-[2.5rem] border-slate-800 h-[400px] flex flex-col relative overflow-hidden">
+          <div className="glass p-8 rounded-[2.5rem] border-slate-800 h-[400px] flex flex-col relative overflow-hidden group">
             <div className="flex items-center justify-between mb-8">
                <div className="flex items-center gap-3">
                   <Activity className="w-5 h-5 text-cyan-400" />
                   <h3 className="text-xs font-black uppercase tracking-widest text-white">Atomic Topology View</h3>
                </div>
-               <div className="px-3 py-1 bg-cyan-400/10 border border-cyan-400/20 rounded-full text-[8px] font-black text-cyan-400 uppercase">Interactive Node</div>
+               <div className="px-3 py-1 bg-cyan-400/10 border border-cyan-400/20 rounded-full text-[8px] font-black text-cyan-400 uppercase">Live Probe</div>
             </div>
 
             <div className="flex-1 flex items-center justify-center">
-               <svg width="240" height="200" viewBox="0 0 240 200" className="drop-shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-                  {/* Hexagonal Lattice Simulation */}
+               <svg width="240" height="200" viewBox="0 0 240 200" className="drop-shadow-[0_0_20px_rgba(34,211,238,0.2)] group-hover:scale-110 transition-transform duration-700">
                   {[0, 60, 120, 180, 240, 300].map(angle => {
                     const rad = (angle * Math.PI) / 180;
                     const x = 120 + 60 * Math.cos(rad);
@@ -325,22 +284,16 @@ const AIFilteringEngine: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-emerald-600/20 to-teal-900/20 p-8 rounded-[2.5rem] border border-emerald-500/20 relative overflow-hidden">
-             <div className="absolute -right-8 -bottom-8 opacity-10">
+          <div className="bg-gradient-to-br from-emerald-600/20 to-teal-900/20 p-8 rounded-[2.5rem] border border-emerald-500/20 relative overflow-hidden group">
+             <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 transition-opacity">
                 <Leaf className="w-32 h-32 text-white" />
              </div>
              <h3 className="text-lg font-black text-white mb-4 flex items-center gap-2 uppercase tracking-tighter">
-                <Leaf className="w-5 h-5 text-emerald-400" /> SDG-13: Climate Action
+                <Leaf className="w-5 h-5 text-emerald-400" /> SDG-13 Impact
              </h3>
              <p className="text-xs text-slate-300 leading-relaxed font-medium italic">
-               "By integrating GNN-based topological screening with VQE Quantum precision, we reduce the R&D lifecycle for carbon capture materials from 10 years to 8 months, potentially preventing 4.2 Gigatons of CO₂ emissions by 2040."
+               Discovery lifecycle reduced by 15x. Potential reduction of 4.2 Gigatons of CO₂ by 2040 using Quantum-GNN validated MOF architectures.
              </p>
-             <div className="mt-6 flex items-center gap-4">
-                <div className="h-2 flex-1 bg-slate-950 rounded-full overflow-hidden">
-                   <div className="h-full bg-emerald-400 w-3/4 shadow-[0_0_10px_rgba(52,211,153,0.5)]"></div>
-                </div>
-                <span className="text-[10px] font-black text-emerald-400">75% Reduction in Search Cost</span>
-             </div>
           </div>
         </div>
       </div>
