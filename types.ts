@@ -4,6 +4,7 @@ export enum WorkflowState {
   AI_FILTERING = 'ai-filtering',
   QUANTUM_SIMULATION = 'quantum-simulation',
   RESULTS = 'results',
+  DIGITAL_TWIN = 'digital-twin',
   CONFIG = 'config',
   LOGS = 'logs',
   SUSTAINABILITY = 'sustainability',

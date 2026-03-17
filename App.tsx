@@ -46,6 +46,7 @@ import CleanAirScenarioLab from './components/CleanAirScenarioLab';
 import QuantumOptimizationEngine from './components/QuantumOptimizationEngine';
 import PredictionDashboard from './components/PredictionDashboard';
 import QuantumDecisionEngine from './components/QuantumDecisionEngine';
+import DigitalTwinEngine from './components/DigitalTwinEngine';
 
 const DISCOVERY_DATABASE: MaterialCandidate[] = [
   {
@@ -320,6 +321,7 @@ const App: React.FC = () => {
       case WorkflowState.QUANTUM_OPTIMIZATION: return { text: "QUANTUM OPTIMIZATION ENGINE", color: "text-cyan-400" };
       case WorkflowState.PREDICTION: return { text: "HYBRID QUANTUM-AI FORECASTING", color: "text-cyan-400" };
       case WorkflowState.DECISION_ENGINE: return { text: "QUANTUM STRATEGY OPTIMIZATION", color: "text-emerald-400" };
+      case WorkflowState.DIGITAL_TWIN: return { text: "CLIMATE DIGITAL TWIN ENGINE", color: "text-cyan-400" };
       default: return { text: "SYSTEM ACTIVE", color: "text-slate-400" };
     }
   };
@@ -465,6 +467,7 @@ const App: React.FC = () => {
           {workflow === WorkflowState.QUANTUM_OPTIMIZATION && <QuantumOptimizationEngine />}
           {workflow === WorkflowState.PREDICTION && <PredictionDashboard />}
           {workflow === WorkflowState.DECISION_ENGINE && <QuantumDecisionEngine />}
+          {workflow === WorkflowState.DIGITAL_TWIN && <DigitalTwinEngine />}
         </div>
 
         <div className="h-14 glass border-t border-slate-200 dark:border-slate-800 flex items-center px-6 gap-6 overflow-hidden z-20">

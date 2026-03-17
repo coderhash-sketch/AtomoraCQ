@@ -46,6 +46,18 @@ const Sidebar: React.FC<SidebarProps> = ({ workflow, setWorkflow }) => {
       glowShadow: 'shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]'
     },
     { 
+      id: 'digital-twin', 
+      label: 'Digital Twin', 
+      desc: 'Atmospheric Sim',
+      icon: Activity, 
+      state: WorkflowState.DIGITAL_TWIN,
+      active: workflow === WorkflowState.DIGITAL_TWIN,
+      colorClass: 'text-cyan-400',
+      activeBg: 'bg-cyan-400/10',
+      activeBorder: 'border-cyan-400/20',
+      glowShadow: 'shadow-[inset_0_0_20px_rgba(34,211,238,0.1)]'
+    },
+    { 
       id: 'filtering', 
       label: 'Neural Sieve', 
       desc: 'GNN Screening',
